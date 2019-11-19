@@ -22,30 +22,36 @@ const spaLinks = [
 ]
 
 export default function(md, spa) {
-  md.renderer.rules.link_open = renderLinkOpen(md, spa)
-  md.renderer.rules.link_close = renderLinkClose(md, spa)
+  const validSpas = spaLinks.map(({ name }) => name)
+
+  if (!validSpas.includes(spa)) {
+    throw new Error('invalid SPA name')
+  }
+
+  const spaLink = spaLinks.find(({ name }) => name === spa)
+
+  md.renderer.rules.link_open = renderLinkOpen(md, spaLink)
+  md.renderer.rules.link_close = renderLinkClose(md, spaLink)
 }
 
-function renderLinkOpen (md, spa) {
+function renderLinkOpen (md, spaLink) {
   return (tokens, index) => {
     const href = tokens[index].attrs.find(([ name ]) => name === 'href')[1],
-          isRoute = /^\//.test(href),
-          spaLink = spaLinks.find(link => link.name === spa)
+          isInternal = /^\//.test(href)
 
-    return (spaLink && isRoute)
+    return isInternal
       ? spaLink.link_open(href)
       : `<a href="${href}">`
   }
 }
 
-function renderLinkClose (md, spa) {
+function renderLinkClose (md, spaLink) {
   return (tokens, index) => {
     const linkOpenToken = getLinkOpenToken(tokens, index),
           href = linkOpenToken.attrs.find(([ name ]) => name === 'href')[1],
-          isRoute = /^\//.test(href),
-          spaLink = spaLinks.find(link => link.name === spa)
+          isInternal = /^\//.test(href)
 
-    return (spaLink && isRoute)
+    return isInternal
       ? spaLink.link_close()
       : `</a>`
   }

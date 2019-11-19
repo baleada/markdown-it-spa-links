@@ -31,6 +31,7 @@ module.exports = {
     }],
     'import/namespace': [2, {
       allowComputed: true,
-    }]
+    }],
+    'ava/no-import-test-files': ['error', {'files': ['tests/**/*.test.js']}]
   }
 }
