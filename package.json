@@ -1,0 +1,22 @@
+{
+  "name": "@baleada/markdown-it-spa-links",
+  "version": "0.0.0",
+  "description": "Markdown-it plugin to replace links in an SPA with the proper components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/baleada/markdown-it-spa-links.git"
+  },
+  "keywords": [
+    "baleada"
+  ],
+  "author": "AlexVipond",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/baleada/markdown-it-spa-links/issues"
+  },
+  "homepage": "https://gitlab.com/baleada/markdown-it-spa-links#readme"
+}
