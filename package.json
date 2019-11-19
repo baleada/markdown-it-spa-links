@@ -2,21 +2,50 @@
   "name": "@baleada/markdown-it-spa-links",
   "version": "0.0.0",
   "description": "Markdown-it plugin to replace links in an SPA with the proper components",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "node scripts/prepare.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/baleada/markdown-it-spa-links.git"
+    "url": "git+https://gitlab.com/baleada/markdown-it-spa-links.git"
   },
   "keywords": [
-    "baleada"
+    "baleada",
+    "markdown",
+    "SPA links",
+    "vue",
+    "nuxt",
+    "next",
+    "sapper",
+    "markdown-it plugin"
   ],
-  "author": "AlexVipond",
+  "author": {
+    "name": "Alex Vipond",
+    "email": "hello@alexvipond.dev",
+    "url": "https://alexvipond.dev"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://gitlab.com/baleada/markdown-it-spa-links/issues"
   },
-  "homepage": "https://gitlab.com/baleada/markdown-it-spa-links#readme"
+  "homepage": "https://baleada.netlify.com",
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-private-methods": "^7.6.0",
+    "@babel/preset-env": "^7.7.1",
+    "@nuxtjs/eslint-config": "^1.1.2",
+    "ava": "^2.4.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-ava": "^9.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-nuxt": "^0.5.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
 }
