@@ -19,9 +19,14 @@ const spaLinks = [
     link_open: href => `<a href="${href}">`,
     link_close: () => `</a>`,
   },
+  {
+    name: 'inertia',
+    link_open: href => `<InertiaLink href="${href}">`,
+    link_close: () => `</InertiaLink>`,
+  }
 ]
 
-export default function(md, spa) {
+export default function(md, { spa, base }) {
   const validSpas = spaLinks.map(({ name }) => name)
 
   if (!validSpas.includes(spa)) {
@@ -30,14 +35,15 @@ export default function(md, spa) {
 
   const spaLink = spaLinks.find(({ name }) => name === spa)
 
-  md.renderer.rules.link_open = renderLinkOpen(md, spaLink)
-  md.renderer.rules.link_close = renderLinkClose(md, spaLink)
+  md.renderer.rules.link_open = renderLinkOpen({ md, spaLink, base })
+  md.renderer.rules.link_close = renderLinkClose({ md, spaLink, base })
 }
 
-function renderLinkOpen (md, spaLink) {
+function renderLinkOpen ({ md, spaLink, base }) {
   return (tokens, index) => {
     const href = tokens[index].attrs.find(([ name ]) => name === 'href')[1],
-          isInternal = /^\//.test(href)
+          baseRegExp = base ? new RegExp(`^${base}`) : /$.+^/,
+          isInternal = /^\//.test(href) || baseRegExp.test(href)
 
     return isInternal
       ? spaLink.link_open(href)
@@ -45,11 +51,12 @@ function renderLinkOpen (md, spaLink) {
   }
 }
 
-function renderLinkClose (md, spaLink) {
+function renderLinkClose ({ md, spaLink, base }) {
   return (tokens, index) => {
     const linkOpenToken = getLinkOpenToken(tokens, index),
           href = linkOpenToken.attrs.find(([ name ]) => name === 'href')[1],
-          isInternal = /^\//.test(href)
+          baseRegExp = base ? new RegExp(`^${base}`) : /$.+^/,
+          isInternal = /^\//.test(href) || baseRegExp.test(href)
 
     return isInternal
       ? spaLink.link_close()
