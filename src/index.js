@@ -21,8 +21,8 @@ const spaLinks = [
   },
   {
     name: 'inertia',
-    link_open: href => `<InertiaLink href="${href}">`,
-    link_close: () => `</InertiaLink>`,
+    link_open: href => `<inertia-link href="${href}">`,
+    link_close: () => `</inertia-link>`,
   }
 ]
 
