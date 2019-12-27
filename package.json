@@ -1,6 +1,6 @@
 {
   "name": "@baleada/markdown-it-spa-links",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Markdown-it plugin to replace links in an SPA with the proper components",
   "main": "lib/index.js",
   "scripts": {
