@@ -1,13 +1,8 @@
 const spaLinks = [
   {
-    name: 'nuxt',
-    link_open: href => `<NuxtLink to="${href}">`,
-    link_close: () => `</NuxtLink>`,
-  },
-  {
-    name: 'vue',
-    link_open: href => `<RouterLink to="${href}">`,
-    link_close: () => `</RouterLink>`,
+    name: 'inertia',
+    link_open: href => `<inertia-link href="${href}">`,
+    link_close: () => `</inertia-link>`,
   },
   {
     name: 'next',
@@ -15,15 +10,20 @@ const spaLinks = [
     link_close: () => `</a></Link>`,
   },
   {
-    name: 'sapper',
-    link_open: href => `<a href="${href}">`,
-    link_close: () => `</a>`,
+    name: 'nuxt',
+    link_open: href => `<NuxtLink to="${href}">`,
+    link_close: () => `</NuxtLink>`,
   },
   {
-    name: 'inertia',
-    link_open: href => `<inertia-link href="${href}">`,
-    link_close: () => `</inertia-link>`,
-  }
+    name: 'react',
+    link_open: href => `<Link to="${href}">`,
+    link_close: () => `</Link>`,
+  },
+  {
+    name: 'vue',
+    link_open: href => `<RouterLink to="${href}">`,
+    link_close: () => `</RouterLink>`,
+  },
 ]
 
 export default function(md, { spa, base }) {
