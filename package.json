@@ -1,8 +1,8 @@
 {
   "name": "@baleada/spa-links",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Markdown-it plugin to replace links in an SPA with the proper components",
-  "main": "lib/markdown-it.js",
+  "main": "markdown-it.js",
   "scripts": {
     "prepare": "node scripts/prepare.js",
     "test": "ava"
@@ -53,5 +53,8 @@
     "eslint-plugin-standard": "^4.0.1",
     "markdown-it": "^10.0.0",
     "regenerator-runtime": "^0.13.3"
+  },
+  "dependencies": {
+    "@baleada/prepare": "0.0.2"
   }
 }

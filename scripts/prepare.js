@@ -1,7 +1,7 @@
 const babelify = require('./babelify')
 
 function prepare () {
-  babelify()
+  babelify('markdown-it')
 }
 
 prepare()
