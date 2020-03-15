@@ -1,7 +1,7 @@
-const babelify = require('./babelify')
+const rollup = require('./rollup')
 
 function prepare () {
-  babelify('markdown-it')
+  rollup('markdown-it')
 }
 
 prepare()
