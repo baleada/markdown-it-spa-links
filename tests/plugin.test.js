@@ -1,6 +1,6 @@
 import test from 'ava'
 import MarkdownIt from 'markdown-it'
-import plugin from '../src'
+import plugin from '../src/markdown-it'
 
 const internal = '[internal](/internal)',
       external = '[external](https://example.com)'
