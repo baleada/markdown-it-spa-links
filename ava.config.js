@@ -7,7 +7,8 @@ export default {
   babel: {
     compileAsTests: [
       'src/**/*.js',
-      'tests/test-util/*.js'
+      'node_modules/@baleada/logic/factories/insertable.js',
+      'tests/test-util/*.js',
     ],
     testOptions: {
       presets: [

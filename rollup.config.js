@@ -2,16 +2,11 @@ import babel from 'rollup-plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 
 export default {
-  external: [
-    'markdown-it-container',
-  ],
+  external: [],
   input: [
-    'src/markdown-it/index.js',
+    'src/index.js',
   ],
-  output: {
-    dir: 'markdown-it',
-    format: 'esm',
-  },
+  output: { file: 'lib/index.js', format: 'esm' },
   plugins: [
     babel({
       exclude: 'node_modules/**'

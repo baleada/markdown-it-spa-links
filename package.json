@@ -1,15 +1,15 @@
 {
-  "name": "@baleada/spa-links",
-  "version": "0.3.1",
+  "name": "@baleada/markdown-it-spa-links",
+  "version": "0.5.0",
   "description": "Markdown-it plugin to replace links in an SPA with the proper components",
-  "main": "markdown-it.js",
+  "main": "lib/index.js",
   "scripts": {
     "prepare": "node scripts/prepare.js",
     "test": "ava"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/baleada/spa-links.git"
+    "url": "git+https://gitlab.com/baleada/markdown-it-spa-links.git"
   },
   "keywords": [
     "baleada",
@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/baleada/spa-links/issues"
+    "url": "https://gitlab.com/baleada/markdown-it-spa-links/issues"
   },
   "homepage": "https://baleada.netlify.com",
   "devDependencies": {
@@ -40,7 +40,8 @@
     "@babel/plugin-proposal-private-methods": "^7.6.0",
     "@babel/preset-env": "^7.7.1",
     "@nuxtjs/eslint-config": "^1.1.2",
-    "ava": "^3.5.0",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "ava": "^3.6.0",
     "babel-eslint": "^10.0.3",
     "core-js": "^3.4.1",
     "eslint": "^6.6.0",
@@ -52,7 +53,9 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "markdown-it": "^10.0.0",
-    "regenerator-runtime": "^0.13.3"
+    "markdown-it-link-attributes": "^3.0.0",
+    "regenerator-runtime": "^0.13.3",
+    "rollup-plugin-babel": "^4.4.0"
   },
   "dependencies": {
     "@baleada/prepare": "0.0.2"

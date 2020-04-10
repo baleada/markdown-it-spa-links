@@ -1,7 +1,9 @@
-const rollup = require('./rollup')
+const { empty } = require('@baleada/prepare')
+      compile = require('./compile')
 
 function prepare () {
-  rollup('markdown-it')
+  empty('lib')
+  compile()
 }
 
 prepare()
