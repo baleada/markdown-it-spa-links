@@ -1,6 +1,6 @@
 {
   "name": "@baleada/markdown-it-spa-links",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Markdown-it plugin to replace links in an SPA with the proper components",
   "main": "lib/index.js",
   "scripts": {
@@ -39,6 +39,7 @@
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/plugin-proposal-private-methods": "^7.6.0",
     "@babel/preset-env": "^7.7.1",
+    "@baleada/prepare": "0.0.2",
     "@nuxtjs/eslint-config": "^1.1.2",
     "@rollup/plugin-node-resolve": "^7.1.1",
     "ava": "^3.6.0",
@@ -56,8 +57,5 @@
     "markdown-it-link-attributes": "^3.0.0",
     "regenerator-runtime": "^0.13.3",
     "rollup-plugin-babel": "^4.4.0"
-  },
-  "dependencies": {
-    "@baleada/prepare": "0.0.2"
   }
 }
