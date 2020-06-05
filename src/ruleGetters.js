@@ -10,8 +10,8 @@ export function getLinkOpenRule ({ md, spaLink, base, defaultRender }) {
       spaLink.link_open({ tokens, token: tokens[index], base, index })      
     }
 
-    return spaLink.mutatesRenderedOpen && isInternal
-      ? spaLink.mutateRenderedOpen(defaultRender(tokens, index, options, env, self))
+    return spaLink.customRendersOpen && isInternal
+      ? spaLink.customRenderOpen({ tokens, index, options, env, self })
       : defaultRender(tokens, index, options, env, self)
   }
 }
@@ -28,8 +28,8 @@ export function getLinkCloseRule ({ md, spaLink, base, defaultRender }) {
       spaLink.link_close({ tokens, token: tokens[index], index })
     }
 
-    return spaLink.mutatesRenderedClose && isInternal
-      ? spaLink.mutateRenderedClose(defaultRender(tokens, index, options, env, self))
+    return spaLink.customRendersClose && isInternal
+      ? spaLink.customRenderClose(defaultRender(tokens, index, options, env, self))
       : defaultRender(tokens, index, options, env, self)
   }
 }

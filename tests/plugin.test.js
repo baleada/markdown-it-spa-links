@@ -134,5 +134,14 @@ test(`plugin(md, { spa: 'next' }) merges with other plugins that mutate link tok
   t.context.md.use(plugin, { spa: 'next' })
   t.context.md.use(...otherPluginStub)
   const markup = t.context.md.render(internal)
-  t.is(markup, '<p><Link href="/internal" rel="noopener"><a>internal</a></Link></p>\n')
+  // TODO: Link should get href and supported props, <a> should get everything else
+  t.is(markup, '<p><Link href="/internal"><a rel="noopener">internal</a></Link></p>\n')
+})
+
+test(`plugin(md, { spa: 'next' }) moves invalid Link attributes to the <a> tag`, t => {
+  t.context.md.use(plugin, { spa: 'next' })
+  t.context.md.use(...otherPluginStub)
+  const markup = t.context.md.render(internal)
+  // TODO: Link should get href and supported props, <a> should get everything else
+  t.is(markup, '<p><Link href="/internal"><a rel="noopener">internal</a></Link></p>\n')
 })

@@ -18,14 +18,31 @@ export default [
       mutateTag({ token, to: 'Link' })
       mutateUrl({ token, attr: 'href', base })
     },
-    mutatesRenderedOpen: true,
-    mutateRenderedOpen: rendered => `${rendered}<a>`,
+    customRendersOpen: true,
+    customRenderOpen: ({ tokens, index, options, env, self }) => {
+      const token = tokens[index],
+            validLinkAttrs = [
+              'href',
+              'as',
+              'passHref',
+              'prefetch',
+              'replace',
+              'scroll',
+              'shallow',
+            ],
+            linkAttrs = token.attrs.filter(([attr]) => validLinkAttrs.includes(attr)),
+            link = linkAttrs.reduce((link, [attr, value]) => `${link} ${attr}="${value}"`, '<Link') + '>',
+            aAttrs = token.attrs.filter(([attr]) => !validLinkAttrs.includes(attr)),
+            a = aAttrs.reduce((a, [attr, value]) => `${a} ${attr}="${value}"`, '<a') + '>'
+
+      return `${link}${a}`
+    },
     hrefAlias: 'href',
     link_close: ({ tokens, token, index }) => {
       mutateTag({ token, to: 'Link' })
     },
-    mutatesRenderedClose: true,
-    mutateRenderedClose: rendered => `</a>${rendered}`,
+    customRendersClose: true,
+    customRenderClose: rendered => `</a>${rendered}`,
   },
   {
     name: 'react',
