@@ -15,7 +15,7 @@ test('plugin(md, [invalid]) throws an error', t => {
   t.throws(invalid)
 })
 
-test('plugin(md, { spa: [any] }) renders anchor for external links', t => {
+test('plugin(md, { spa: <any> }) renders anchor for external links', t => {
   const vue = new MarkdownIt(),
         nuxt = new MarkdownIt(),
         next = new MarkdownIt({ html: true }),
@@ -45,7 +45,7 @@ test('plugin(md, { spa: [any] }) renders anchor for external links', t => {
   t.assert(result)
 })
 
-test('plugin(md, { spa: [any], base }) detects and replaces base url', t => {
+test('plugin(md, { spa: <any>, base }) detects and replaces base url', t => {
   t.context.md.use(plugin, { spa: 'nuxt', base: 'https://base.com' })
   const withBaseUrl = '[internal](https://base.com/internal)',
         markup = t.context.md.render(withBaseUrl)
@@ -92,7 +92,7 @@ test('other plugin works (sanity check before next test)', t => {
   t.is(markup, '<p><a href="/internal" rel="noopener">internal</a></p>\n')
 })
 
-test('plugin(md, { spa: [any except next] }) merges with other plugins that mutate link tokens', t => {
+test('plugin(md, { spa: <any except next> }) merges with other plugins that mutate link tokens', t => {
   const vue = new MarkdownIt(),
         nuxt = new MarkdownIt(),
         // next = new MarkdownIt({ html: true }),
@@ -131,9 +131,9 @@ test('plugin(md, { spa: [any except next] }) merges with other plugins that muta
   t.assert(result)
 })
 
-test(`plugin(md, { spa: 'next' }) merges with other plugins that mutate link tokens as long as SPA Links is last in the use chain`, t => {
-  t.context.md.use(...otherPluginStub)
+test(`plugin(md, { spa: 'next' }) merges with other plugins that mutate link tokens as long as SPA Links is first in the use chain`, t => {
   t.context.md.use(plugin, { spa: 'next' })
+  t.context.md.use(...otherPluginStub)
   const markup = t.context.md.render(internal)
   t.is(markup, '<p><Link href="/internal" rel="noopener"><a>internal</a></Link></p>\n')
 })
