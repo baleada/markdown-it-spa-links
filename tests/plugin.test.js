@@ -41,7 +41,6 @@ test('plugin(md, { spa: <any> }) renders anchor for external links', t => {
           inertiaMarkup,
         ].every(markup => markup === '<p><a href="https://example.com">external</a></p>\n')
 
-  console.log(nextMarkup)
   t.assert(result)
 })
 
