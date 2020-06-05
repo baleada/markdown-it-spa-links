@@ -3,6 +3,7 @@
   "version": "0.5.1",
   "description": "Markdown-it plugin to replace links in an SPA with the proper components",
   "main": "lib/index.js",
+  "module": "lib/index.esm.js",
   "scripts": {
     "prepare": "node scripts/prepare.js",
     "test": "ava"

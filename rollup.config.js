@@ -6,7 +6,10 @@ export default {
   input: [
     'src/index.js',
   ],
-  output: { file: 'lib/index.js', format: 'esm' },
+  output: [
+    { file: 'lib/index.js', format: 'cjs' },
+    { file: 'lib/index.esm.js', format: 'esm' }
+  ],
   plugins: [
     babel({
       exclude: 'node_modules/**'
