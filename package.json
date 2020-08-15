@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/baleada/markdown-it-spa-links.git"
+    "url": "git+https://github.com/baleada/markdown-it-spa-links.git"
   },
   "keywords": [
     "baleada",
@@ -30,7 +30,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/baleada/markdown-it-spa-links/issues"
+    "url": "https://github.com/baleada/markdown-it-spa-links/issues"
   },
   "homepage": "https://baleada.netlify.com",
   "devDependencies": {
