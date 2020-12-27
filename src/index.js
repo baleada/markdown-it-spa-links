@@ -1,5 +1,5 @@
-import { getLinkOpenRule, getLinkCloseRule } from './ruleGetters'
-import spaLinks from './rulesBySpa'
+import { getLinkOpenRule, getLinkCloseRule } from './ruleGetters.js'
+import spaLinks from './rulesBySpa.js'
 
 function markdownItSpaLinks (md, { spa, base }) {
   const validSpas = spaLinks.map(({ name }) => name)
@@ -11,13 +11,13 @@ function markdownItSpaLinks (md, { spa, base }) {
   const spaLink = spaLinks.find(({ name }) => name === spa)
 
   // Adapted from https://github.com/crookedneighbor/markdown-it-link-attributes
-  const defaultRender = md.renderer.rules.link_open || this.defaultRender
+  const render = md.renderer.rules.link_open || defaultRender
 
-  md.renderer.rules.link_open = getLinkOpenRule({ md, spaLink, base, defaultRender })
-  md.renderer.rules.link_close = getLinkCloseRule({ md, spaLink, base, defaultRender })
+  md.renderer.rules.link_open = getLinkOpenRule({ md, spaLink, base, render })
+  md.renderer.rules.link_close = getLinkCloseRule({ md, spaLink, base, render })
 }
 
-markdownItSpaLinks.defaultRender = function (tokens, index, options, env, self) {
+function defaultRender (tokens, index, options, env, self) {
   return self.renderToken(tokens, index, options)
 }
 

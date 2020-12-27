@@ -2,11 +2,17 @@
   "name": "@baleada/markdown-it-spa-links",
   "version": "0.5.3",
   "description": "Markdown-it plugin to replace links in an SPA with the proper components",
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
+  "type": "module",
+  "main": "lib/index.cjs",
+  "module": "lib/index.js",
+  "exports": {
+    "require": "./lib/index.cjs",
+    "import": "./lib/index.js"
+  },
   "scripts": {
-    "prepare": "node scripts/prepare.js",
-    "test": "ava"
+    "prepare": "rollup --config rollup.config.js",
+    "test:only": "run() { npx uvu tests/$2 $1.test.js$; }; run",
+    "test": "npm run test:only ."
   },
   "repository": {
     "type": "git",
@@ -34,29 +40,10 @@
   },
   "homepage": "https://baleada.netlify.com",
   "devDependencies": {
-    "@ava/babel": "^1.0.1",
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/plugin-proposal-class-properties": "^7.7.0",
-    "@babel/plugin-proposal-private-methods": "^7.6.0",
-    "@babel/preset-env": "^7.7.1",
-    "@baleada/prepare": "0.0.2",
-    "@nuxtjs/eslint-config": "^1.1.2",
-    "@rollup/plugin-node-resolve": "^7.1.1",
-    "ava": "^3.6.0",
-    "babel-eslint": "^10.0.3",
-    "core-js": "^3.4.1",
-    "eslint": "^6.6.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-ava": "^9.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-nuxt": "^0.5.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
+    "@baleada/prepare": "^0.4.15",
     "markdown-it": "^10.0.0",
     "markdown-it-link-attributes": "^3.0.0",
-    "regenerator-runtime": "^0.13.3",
-    "rollup-plugin-babel": "^4.4.0"
+    "rollup": "^2.35.1",
+    "uvu": "^0.5.1"
   }
 }

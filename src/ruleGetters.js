@@ -1,6 +1,6 @@
-import { findAttr } from './util'
+import { findAttr } from './util/index.js'
 
-export function getLinkOpenRule ({ md, spaLink, base, defaultRender }) {
+export function getLinkOpenRule ({ md, spaLink, base, render }) {
   return function (tokens, index, options, env, self) {
     const href = findAttr({ token: tokens[index], attr: 'href' })[1],
           baseRegExp = base ? new RegExp(`^${base}`) : /$.+^/,
@@ -12,11 +12,11 @@ export function getLinkOpenRule ({ md, spaLink, base, defaultRender }) {
 
     return spaLink.customRendersOpen && isInternal
       ? spaLink.customRenderOpen({ tokens, index, options, env, self })
-      : defaultRender(tokens, index, options, env, self)
+      : render(tokens, index, options, env, self)
   }
 }
 
-export function getLinkCloseRule ({ md, spaLink, base, defaultRender }) {
+export function getLinkCloseRule ({ md, spaLink, base, render }) {
   return function (tokens, index, options, env, self) {
     const linkOpenToken = getLinkOpenToken({ tokens, index }),
           hrefAttr = findAttr({ token: linkOpenToken, attr: spaLink.hrefAlias }) || findAttr({ token: linkOpenToken, attr: 'href' }),
@@ -29,8 +29,8 @@ export function getLinkCloseRule ({ md, spaLink, base, defaultRender }) {
     }
 
     return spaLink.customRendersClose && isInternal
-      ? spaLink.customRenderClose(defaultRender(tokens, index, options, env, self))
-      : defaultRender(tokens, index, options, env, self)
+      ? spaLink.customRenderClose(render(tokens, index, options, env, self))
+      : render(tokens, index, options, env, self)
   }
 }
 

@@ -1,4 +1,4 @@
-import { findAttr } from './util'
+import { findAttr } from './util/index.js'
 
 export default [
   {

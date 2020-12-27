@@ -1,19 +1,17 @@
-import babel from 'rollup-plugin-babel'
-import resolve from '@rollup/plugin-node-resolve'
+import { configureable } from '@baleada/prepare'
 
-export default {
-  external: [],
-  input: [
-    'src/index.js',
-  ],
-  output: [
-    { file: 'lib/index.js', format: 'cjs' },
-    { file: 'lib/index.esm.js', format: 'esm' }
-  ],
-  plugins: [
-    babel({
-      exclude: 'node_modules/**'
-    }),
-    resolve(),
-  ]
-}
+const shared = configureable('rollup')
+        .input('src/index.js')
+        .resolve(),
+      esm = shared
+        .delete({ targets: 'lib/*' })
+        .esm({ file: 'lib/index.js', target: 'node' })
+        .analyze(),
+      cjs = shared
+        .cjs({ file: 'lib/index.cjs' })
+
+
+export default [
+  esm.configure(),
+  cjs.configure(),
+]
