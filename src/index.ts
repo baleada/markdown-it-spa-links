@@ -2,7 +2,7 @@ import type MarkdownIt from 'markdown-it'
 import { toLinkOpenRule, toLinkCloseRule } from './rules'
 import { createLinkMetadata } from './extracted'
 
-type Options = {
+export type Options = {
   spa?: 'inertia' | 'next' | 'react' | 'nuxt' | 'vue',
   base?: string,
 }
