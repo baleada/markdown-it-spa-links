@@ -1,10 +1,10 @@
 import { suite as createSuite } from 'uvu'
 import * as assert from 'uvu/assert'
-import MarkdownItSpaLinks from '../src/index.js'
+import { createMarkdownItSpaLinks } from '../src'
 import MarkdownIt from 'markdown-it'
 import MarkdownItLinkAttributes from 'markdown-it-link-attributes'
 
-const suite = createSuite('plugin (node)'),
+const suite = createSuite('plugin'),
       internal = '[internal](/internal)',
       external = '[external](https://example.com)'
 
@@ -19,11 +19,11 @@ suite('plugin(md, { spa: <any> }) renders anchor for external links', context =>
         react = new MarkdownIt(),
         inertia = new MarkdownIt()
 
-  vue.use(MarkdownItSpaLinks, { spa: 'vue' })
-  nuxt.use(MarkdownItSpaLinks, { spa: 'nuxt' })
-  next.use(MarkdownItSpaLinks, { spa: 'next' })
-  react.use(MarkdownItSpaLinks, { spa: 'react' })
-  inertia.use(MarkdownItSpaLinks, { spa: 'inertia' })
+  vue.use(createMarkdownItSpaLinks({ spa: 'vue' }))
+  nuxt.use(createMarkdownItSpaLinks({ spa: 'nuxt' }))
+  next.use(createMarkdownItSpaLinks({ spa: 'next' }))
+  react.use(createMarkdownItSpaLinks({ spa: 'react' }))
+  inertia.use(createMarkdownItSpaLinks({ spa: 'inertia' }))
 
   const vueMarkup = vue.render(external),
         nuxtMarkup = nuxt.render(external),
@@ -42,46 +42,50 @@ suite('plugin(md, { spa: <any> }) renders anchor for external links', context =>
 })
 
 suite('plugin(md, { spa: <any>, base }) detects and replaces base url', context => {
-  context.md.use(MarkdownItSpaLinks, { spa: 'nuxt', base: 'https://base.com' })
+  context.md.use(createMarkdownItSpaLinks({ spa: 'nuxt', base: 'https://base.com' }))
   const withBaseUrl = '[internal](https://base.com/internal)',
         markup = context.md.render(withBaseUrl)
   assert.is(markup, '<p><NuxtLink to="/internal">internal</NuxtLink></p>\n')
 })
 
 suite(`plugin(md, { spa: 'nuxt' }) renders NuxtLink for internal links`, context => {
-  context.md.use(MarkdownItSpaLinks, { spa: 'nuxt' })
+  context.md.use(createMarkdownItSpaLinks({ spa: 'nuxt' }))
   const markup = context.md.render(internal)
   assert.is(markup, '<p><NuxtLink to="/internal">internal</NuxtLink></p>\n')
 })
 
 suite(`plugin(md, { spa: 'vue' }) renders RouterLink for internal links`, context => {
-  context.md.use(MarkdownItSpaLinks, { spa: 'vue' })
+  context.md.use(createMarkdownItSpaLinks({ spa: 'vue' }))
   const markup = context.md.render(internal)
   assert.is(markup, '<p><RouterLink to="/internal">internal</RouterLink></p>\n')
 })
 
 suite(`plugin(md, { spa: 'next' }) renders Link > a for internal links`, context => {
-  context.md.use(MarkdownItSpaLinks, { spa: 'next' })
+  context.md.use(createMarkdownItSpaLinks({ spa: 'next' }))
   const markup = context.md.render(internal)
   assert.is(markup, '<p><Link href="/internal"><a>internal</a></Link></p>\n')
 })
 
 suite(`plugin(md, { spa: 'react' }) renders Link for internal links`, context => {
-  context.md.use(MarkdownItSpaLinks, { spa: 'react' })
+  context.md.use(createMarkdownItSpaLinks({ spa: 'react' }))
   const markup = context.md.render(internal)
   assert.is(markup, '<p><Link to="/internal">internal</Link></p>\n')
 })
 
 suite(`plugin(md, { spa: 'inertia' }) renders InertiaLink for internal links`, context => {
-  context.md.use(MarkdownItSpaLinks, { spa: 'inertia' })
+  context.md.use(createMarkdownItSpaLinks({ spa: 'inertia' }))
   const markup = context.md.render(internal)
   assert.is(markup, '<p><inertia-link href="/internal">internal</inertia-link></p>\n')
 })
 
-const otherPluginStub = [
+const otherPluginStub: [
+  typeof MarkdownItLinkAttributes,
+  MarkdownItLinkAttributes.Config
+] = [
   MarkdownItLinkAttributes,
   { attrs: { rel: 'noopener' } }
 ]
+
 suite('other plugin works (sanity check before next suite)', context => {
   context.md.use(...otherPluginStub)
   const markup = context.md.render(internal)
@@ -95,19 +99,19 @@ suite('plugin(md, { spa: <any except next> }) merges with other plugins that mut
         react = new MarkdownIt(),
         inertia = new MarkdownIt()
 
-  vue.use(MarkdownItSpaLinks, { spa: 'vue' })
+  vue.use(createMarkdownItSpaLinks({ spa: 'vue' }))
   vue.use(...otherPluginStub)
 
-  nuxt.use(MarkdownItSpaLinks, { spa: 'nuxt' })
+  nuxt.use(createMarkdownItSpaLinks({ spa: 'nuxt' }))
   nuxt.use(...otherPluginStub)
 
-  // next.use(MarkdownItSpaLinks, { spa: 'next' })
+  // next.use(createMarkdownItSpaLinks({ spa: 'next' }))
   // next.use(...otherPluginStub)
 
-  react.use(MarkdownItSpaLinks, { spa: 'react' })
+  react.use(createMarkdownItSpaLinks({ spa: 'react' }))
   react.use(...otherPluginStub)
 
-  inertia.use(MarkdownItSpaLinks, { spa: 'inertia' })
+  inertia.use(createMarkdownItSpaLinks({ spa: 'inertia' }))
   inertia.use(...otherPluginStub)
 
 
@@ -128,7 +132,7 @@ suite('plugin(md, { spa: <any except next> }) merges with other plugins that mut
 })
 
 suite(`plugin(md, { spa: 'next' }) merges with other plugins that mutate link tokens as long as SPA Links is first in the use chain`, context => {
-  context.md.use(MarkdownItSpaLinks, { spa: 'next' })
+  context.md.use(createMarkdownItSpaLinks({ spa: 'next' }))
   context.md.use(...otherPluginStub)
   const markup = context.md.render(internal)
   // TODO: Link should get href and supported props, <a> should get everything else
@@ -136,7 +140,7 @@ suite(`plugin(md, { spa: 'next' }) merges with other plugins that mutate link to
 })
 
 suite(`plugin(md, { spa: 'next' }) moves invalid Link attributes to the <a> tag`, context => {
-  context.md.use(MarkdownItSpaLinks, { spa: 'next' })
+  context.md.use(createMarkdownItSpaLinks({ spa: 'next' }))
   context.md.use(...otherPluginStub)
   const markup = context.md.render(internal)
   // TODO: Link should get href and supported props, <a> should get everything else

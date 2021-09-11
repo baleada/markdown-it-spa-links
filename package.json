@@ -2,16 +2,16 @@
   "name": "@baleada/markdown-it-spa-links",
   "version": "0.6.2",
   "description": "Markdown-it plugin to replace links in an SPA with the proper components",
-  "type": "module",
   "main": "lib/index.cjs",
   "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     "require": "./lib/index.cjs",
     "import": "./lib/index.js"
   },
   "scripts": {
-    "prepare": "rollup --config rollup.config.js",
-    "test:only": "run() { npx uvu tests/$2 $1.test.js$; }; run",
+    "prepare": "tsc && rollup --config rollup.config.ts",
+    "test:only": "run() { uvu -r esbuild-register tests/$2 $1.test.ts$; }; run",
     "test": "npm run test:only ."
   },
   "repository": {
@@ -40,10 +40,15 @@
   },
   "homepage": "https://baleada.netlify.com",
   "devDependencies": {
-    "@baleada/prepare": "^0.4.15",
-    "markdown-it": "^10.0.0",
+    "@baleada/prepare": "^0.5.12",
+    "esbuild": "^0.12.26",
+    "esbuild-register": "^3.0.0",
     "markdown-it-link-attributes": "^3.0.0",
     "rollup": "^2.35.1",
+    "typescript": "^4.4.3",
     "uvu": "^0.5.1"
+  },
+  "dependencies": {
+    "markdown-it": "^12.2.0"
   }
 }
